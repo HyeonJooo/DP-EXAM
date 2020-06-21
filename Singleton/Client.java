@@ -4,7 +4,7 @@ public class Client {
 	public static void main(String[] args) {
 		User[] user = new User[USER_NUM];
 		for (int i = 0; i < USER_NUM; i++) {
-			// User ÀÎ½ºÅÏ½º »ý¼º
+			// User ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
 			user[i] = new User((i+1));
 			user[i].print();
 		}
