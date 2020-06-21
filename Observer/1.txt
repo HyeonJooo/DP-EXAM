@@ -1,0 +1,53 @@
+옵저버 패턴
+객체들 사이에서 다양한 처리를 할 때 한 객체의 상태가 바뀔 경우 다른 객체에게 변경됬다고 알려줌.
+
+즉, 상태를가지고있는 주체 객체와 상태의 변경을 알아야하는 관찰 객체가 존재해야함
+
+시나리오 설명
+메인메소드에서 wratherData 객체(wd)를 하나 생성함
+wd의 생성자로 어레이리스트 observers 생성
+
+wd를 인자로 currentConditionsDisplay(cd)객체 생성
+cd의 생성자로 wd가 들어와 wd의 내용이 들어간subject객체 생성되고 cd객체가 인자로 wd의 registerObserver 호출하여 cd객체가 어레이리스트 observers에 들어감 (cd는 observer 인터페이스를 참조함)
+
+wd를 인자로 StatisticsDisplay객체 생성
+sd의 생성자로 sd객체의weatherData에 wd가 들어가고 sd를 인자로 wd의 registerObserver가 실행되어 어레이리스트 observer에 sd가 들어감, 이러면 지금 observers배열엔 cd와 sd객체가 들어있음)
+
+이와 비슷하게 메인메소드에서 hd와 fd가 실행되고
+옵저버 어레이리스트에는 cd,sd,hd,fd가 들어가있는상태
+
+여기서 wd의 setMeasuremets가 실행되면
+wd의 멤버 temperature, humidity, pressure값이 바뀌고 measurementChanged메소드가 호출됨
+mc메소드는 notifyobserver를 호출하고
+no메소드는 옵저버배열의 크기만큼 루프를 돌려서
+observers(배열).get(i)를 통해 배열에있는 객체를 observer에 집어넣고 observer.update메소드를 호출함
+예를들면 첫번째루프에서(배열에는 cd,  sd, hd, fd가 들어있음)
+Observer observer = (Observer) observers.get(0); //=cd가 들어감	observer.update(temperature, humidity, pressure); // cd안의 메소드가 실행되어 cd객체의 temp, humi가 바뀌고 cd안의 dispaly메소드 실행하여 이 값을 출력해줌
+
+
+
+cd, sd, fd, hd는 공통적으로
+멤버 : temperature, humidity, weatherdata
+메소드 : update() , display() 가지고있음
+
+
+
+
+
+자바에서 제공하는 옵저버
+아래 인터페이스와 클래스 구현 할 필요없이 기본적으로 제공한다
+
+Observer 인터페이스 : update()
+
+Observable 클래스 implement Observer : addObserver(), deleteObserver(), notifyObserver(), setChange()
+
+이를 통해 speedcontrol 구현하면
+메인메소드에서 SpeedMonitor객체 생성, (생성자X)
+Speedometer객체 생성, 생성자를 통해 currentSpeed 0으로 초기화
+speedo.addObserver(monitor) = speedmonitor 객체를 인자로받아 addObserver()호출, 이 메소드는 util에서 제공하는거임
+speedo.setCurrentSpeed()로 속도 입력하면 currentspeed가 speed로 바뀌고 setChange(); notifyObservers()호출함, 이또한 util에서 구현되있음. setchange()는 boolean으로 값이 바뀐거 확인하는기능
+
+
+ 
+
+
