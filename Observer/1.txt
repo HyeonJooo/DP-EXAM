@@ -46,7 +46,7 @@ Observable 클래스 implement Observer : addObserver(), deleteObserver(), notifyOb
 Speedometer객체 생성, 생성자를 통해 currentSpeed 0으로 초기화
 speedo.addObserver(monitor) = speedmonitor 객체를 인자로받아 addObserver()호출, 이 메소드는 util에서 제공하는거임
 speedo.setCurrentSpeed()로 속도 입력하면 currentspeed가 speed로 바뀌고 setChange(); notifyObservers()호출함, 이또한 util에서 구현되있음. setchange()는 boolean으로 값이 바뀐거 확인하는기능
-
+d
 
  
 
