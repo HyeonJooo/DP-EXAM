@@ -1,7 +1,7 @@
  public class Printer {
     	private static Printer printer = null;
     
-    	private Printer(){}//»ı¼ºÀÚ¸¦ private
+    	private Printer(){}//ìƒì„±ìë¥¼ private
     
     	public static Printer getInstance() {
     		if(printer == null) {
